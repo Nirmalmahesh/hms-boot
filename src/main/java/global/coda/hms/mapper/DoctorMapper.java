@@ -1,6 +1,7 @@
 package global.coda.hms.mapper;
 
 import global.coda.hms.model.Doctor;
+import global.coda.hms.model.DoctorPatientMapper;
 import global.coda.hms.model.Patient;
 import global.coda.hms.model.UserDetails;
 import org.apache.ibatis.annotations.Insert;
@@ -73,13 +74,46 @@ public interface DoctorMapper {
   @Update("update t_doctor set is_active = 0 where pk_doctor_id = #{doctorId}")
   int deleteDoctor(int doctorId);
 
-  @Select("select distinct fk_patient_id from t_record where fk_doctor_id = #{doctorId}")
+  @Select("<script> select distinct fk_doctor_id from t_record " +
+          "<if test='doctorId!=0'>where fk_doctor_id = #{doctorId} and is_active = 1</if>" +
+          "</script>")
   @Results({
-
           @Result(
-                  column = "fk_patient_id", property = "patient",javaType = List.class,
-                  many = @Many(select = "global.coda.hms.mapper.PatientMapper.readPatient")
+                  column = "fk_doctor_id", property = "doctor", one = @One(select = "readDoctor")
+          ),
+          @Result(
+                  column = "fk_doctor_id", property = "patient",
+                  many = @Many(select = "readPatients")
           )
   })
-  List<Patient> getAllPatientsOfDoctor(int doctorId);
+  List<DoctorPatientMapper> getAllPatientsOfDoctor(int doctorId);
+
+  @Select(" select record.fk_patient_id,patient.fk_user_id as user_id,patient.blood_group,patient" +
+          ".weight,patient.is_active,patient.created_date as created_time,patient.updated_date as" +
+          " updated_time from t_record as record left join t_patient as patient on pk_patient_id " +
+          "= fk_patient_id where patient.is_active = 1 and record.fk_doctor_id = #{doctorId} " +
+          "group by patient.pk_patient_id  ")
+  @Results(
+          @Result(
+                  column = "user_id", property = "userDetails", javaType = UserDetails.class,
+                  one = @One(select = "global.coda" +
+                          ".hms.mapper.UserMapper.getUser")
+          )
+  )
+  List<Patient> readPatients(int doctorId);
+
+
+
+  @Select("SELECT `t_doctor`.`pk_doctor_id` as doctor_id,`t_doctor`.`doctor_specialization`, "
+          + "`t_doctor`"
+          + ".`is_active`, `t_doctor`.`created_date` as created_time,`t_doctor`.`updated_date` as"
+          + " updated_time,`t_doctor`"
+          + ".`fk_user_id` as user_id FROM `hms`.`t_doctor` where "
+          + "is_active = 1")
+  @Results(id = "selectPatients", value = {
+
+          @Result(property = "userDetails", javaType = UserDetails.class, column =
+                  "user_id", one = @One(select = "global.coda.hms.mapper.UserMapper.getUser"))
+  })
+  List<Doctor> readDoctors();
 }

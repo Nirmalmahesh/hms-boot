@@ -137,7 +137,7 @@ public class DoctorService {
    * @throws BusinessException the business exception
    * @throws SystemException   the system exception
    */
-  //@Transactional(rollbackFor = {BusinessException.class, SystemException.class})
+  @Transactional(rollbackFor = {BusinessException.class, SystemException.class})
   public boolean deleteDoctor(int doctorId) throws BusinessException, SystemException {
     LOGGER.traceEntry(Integer.toString(doctorId));
     Doctor doctor = readDoctor(doctorId);
@@ -165,14 +165,37 @@ public class DoctorService {
     }
   }
 
-  public DoctorPatientMapper getAllPatientsOfDoctor(int doctorId) throws SystemException,
+  public List<DoctorPatientMapper> getAllPatientsOfDoctor(int doctorId) throws SystemException,
           BusinessException {
     LOGGER.traceEntry(Integer.toString(doctorId));
-    DoctorPatientMapper doctorPatientMapper = new DoctorPatientMapper();
-    Doctor doctor = readDoctor(doctorId);
-    List<Patient> patients = doctorMapper.getAllPatientsOfDoctor(doctorId);
-    doctorPatientMapper.setDoctor(doctor);
-    doctorPatientMapper.setPatient(patients);
+   /* DoctorPatientMapper doctorPatientMapper = new DoctorPatientMapper();
+    Doctor doctor = readDoctor(doctorId);*/
+    List<DoctorPatientMapper> doctorPatientMapper = doctorMapper.getAllPatientsOfDoctor(doctorId);
+   /* doctorPatientMapper.setDoctor(doctor);
+    doctorPatientMapper.setPatient(patients);*/
     return doctorPatientMapper;
+  }
+
+  public List<Patient> check(int doctorId) {
+    Integer[] patients = {1, 2, 3};
+    return null;
+  }
+
+  public List<Doctor> readDoctor() throws BusinessException, SystemException {
+    LOGGER.traceEntry();
+    List<Doctor> doctor = doctorMapper.readDoctors();
+    try {
+      if (doctor == null) {
+        throw new DoctorNotFoundException(ApplicationConstant.DOCTOR_NOT_FOUND);
+      }
+    } catch (DoctorNotFoundException e) {
+      LOGGER.traceExit(e.getMessage());
+      throw new BusinessException(e.getMessage());
+    } catch (Exception e) {
+      LOGGER.traceExit(e.getMessage());
+      throw new SystemException(e);
+    }
+    LOGGER.traceExit(doctor.toString());
+    return doctor;
   }
 }

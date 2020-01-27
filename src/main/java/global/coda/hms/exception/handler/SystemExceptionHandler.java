@@ -9,10 +9,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+/**
+ * The type System exception handler.
+ */
 @ControllerAdvice
 public class SystemExceptionHandler {
   private final Logger LOGGER = LogManager.getLogger(SystemExceptionHandler.class);
 
+  /**
+   * Exception response entity.
+   *
+   * @param exception the exception
+   * @return the response entity
+   */
   @ExceptionHandler(value = SystemException.class)
   public ResponseEntity<?> exception(SystemException exception) {
     LOGGER.error(exception.getMessage());

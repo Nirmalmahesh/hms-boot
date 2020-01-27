@@ -1,0 +1,1 @@
+INSERT INTO `hms`.`t_role` (`role_name`) VALUES ('role');

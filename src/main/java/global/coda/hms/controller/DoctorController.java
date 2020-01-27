@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,11 +18,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * The type Doctor controller.
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/api/doctors")
 public class DoctorController {
@@ -69,6 +76,21 @@ public class DoctorController {
   }
 
   /**
+   * Read all doctors response entity.
+   *
+   * @return the response entity
+   * @throws BusinessException the business exception
+   * @throws SystemException   the system exception
+   */
+  @GetMapping("/")
+  public ResponseEntity<?> readAllDoctors() throws BusinessException, SystemException {
+    LOGGER.traceEntry();
+    List<Doctor> doctor = doctorService.readDoctor();
+    LOGGER.traceExit(doctor);
+    return new ResponseEntity<>(doctor, HttpStatus.OK);
+  }
+
+  /**
    * Update doctor response entity.
    *
    * @param doctor the doctor
@@ -103,10 +125,39 @@ public class DoctorController {
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
 
-  @GetMapping("/{doctorId}/patients")
-  public ResponseEntity<?> getAllPatientsOfDoctor(@PathVariable int doctorId) throws BusinessException, SystemException {
-    LOGGER.traceEntry(Integer.toString(doctorId));
-    DoctorPatientMapper doctorPatientMapper = doctorService.getAllPatientsOfDoctor(doctorId);
+  /**
+   * Gets all patients of doctor.
+   *
+   * @param doctorId the doctor id
+   * @param request  the request
+   * @param response the response
+   * @return the all patients of doctor
+   * @throws BusinessException the business exception
+   * @throws SystemException   the system exception
+   */
+  @GetMapping("/patients")
+  public ResponseEntity<?> getAllPatientsOfDoctor(@RequestParam(value = "doctorId", required =
+          false) Integer doctorId, HttpServletRequest request, HttpServletResponse response) throws BusinessException, SystemException {
+    LOGGER.traceEntry();
+    if (doctorId == null) {
+      doctorId = 0;
+    }
+    List<DoctorPatientMapper> doctorPatientMapper = doctorService.getAllPatientsOfDoctor(doctorId);
+    LOGGER.traceExit(doctorPatientMapper.toString());
     return new ResponseEntity<>(doctorPatientMapper, HttpStatus.OK);
   }
+
+
+  /**
+   * Check response entity.
+   *
+   * @param doctorId the doctor id
+   * @return the response entity
+   */
+  @GetMapping("/check/{doctorId}")
+  public ResponseEntity<?> check(@PathVariable("doctorId") int doctorId) {
+    return new ResponseEntity<>(doctorService.check(doctorId), HttpStatus.OK);
+  }
+
+
 }

@@ -19,20 +19,10 @@ public final class Patient {
   private Date updatedTime;
   private UserDetails userDetails;
 
-  /**
-   * Gets user details.
-   *
-   * @return the user details
-   */
   public UserDetails getUserDetails() {
     return userDetails;
   }
 
-  /**
-   * Sets user details.
-   *
-   * @param userDetails the user details
-   */
   public void setUserDetails(UserDetails userDetails) {
     this.userDetails = userDetails;
   }

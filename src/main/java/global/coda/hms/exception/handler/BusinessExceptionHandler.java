@@ -8,11 +8,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+/**
+ * The type Business exception handler.
+ */
 @ControllerAdvice
 public class BusinessExceptionHandler {
 
   private final Logger LOGGER = LogManager.getLogger(BusinessExceptionHandler.class);
 
+  /**
+   * Exception response entity.
+   *
+   * @param exception the exception
+   * @return the response entity
+   */
   @ExceptionHandler(value = BusinessException.class)
   public ResponseEntity<?> exception(BusinessException exception) {
     return new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

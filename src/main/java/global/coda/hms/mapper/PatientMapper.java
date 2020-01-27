@@ -12,6 +12,8 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * The interface Patient mapper.
  */
@@ -39,9 +41,8 @@ public interface PatientMapper {
    */
   @Select("select pk_patient_id as patient_id, fk_user_id as user_id,blood_group ,weight,"
           + "is_active,created_date as created_time,updated_date as updated_time from t_patient "
-          + "where pk_patient_id = #{patientId}")
+          + "where pk_patient_id = #{patientId} and is_active = 1")
   @Results(id = "selectMap", value = {
-
           @Result(property = "userDetails", javaType = UserDetails.class, column =
                   "user_id", one = @One(select = "global.coda.hms.mapper.UserMapper.getUser"))
   })
@@ -65,4 +66,13 @@ public interface PatientMapper {
    */
   @Update("update t_patient set is_active = 0 where pk_patient_id = #{patientId}")
   int deletePatient(int patientId);
+
+  @Select("select pk_patient_id as patient_id, fk_user_id as user_id,blood_group ,weight,"
+          + "is_active,created_date as created_time,updated_date as updated_time from t_patient "
+          + "where is_active = 1")
+  @Results(id = "selectMapAllPatients", value = {
+          @Result(property = "userDetails", javaType = UserDetails.class, column =
+                  "user_id", one = @One(select = "global.coda.hms.mapper.UserMapper.getUser"))
+  })
+  List<Patient> readPatients();
 }

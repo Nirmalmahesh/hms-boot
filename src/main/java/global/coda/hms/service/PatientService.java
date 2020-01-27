@@ -15,6 +15,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 /**
  * The type Patient service.
@@ -148,6 +150,25 @@ public class PatientService {
     } catch (DeletionFailedException e) {
       LOGGER.traceExit(e.getMessage());
       throw new SystemException(e);
+    } catch (Exception e) {
+      LOGGER.traceExit(e.getMessage());
+      throw new SystemException(e);
+    }
+  }
+
+  public List<Patient> readPatients() throws BusinessException, SystemException {
+    LOGGER.traceEntry();
+    List<Patient> patient = patientMapper.readPatients();
+    try {
+      if (patient == null) {
+        throw new PatientNotFoundException(ApplicationConstant.PATIENT_NOT_FOUND);
+      } else {
+        LOGGER.traceExit(patient);
+        return patient;
+      }
+    } catch (PatientNotFoundException e) {
+      LOGGER.traceExit(e.getMessage());
+      throw new BusinessException(e.getMessage());
     } catch (Exception e) {
       LOGGER.traceExit(e.getMessage());
       throw new SystemException(e);

@@ -13,8 +13,8 @@ public class UserDetails {
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private String password;
   private int roleId;
-  private String firstname;
-  private String lastname;
+  private String firstName;
+  private String lastName;
   private String city;
   private String state;
   private int isActive;
@@ -102,17 +102,17 @@ public class UserDetails {
    *
    * @return the firstname
    */
-  public String getFirstname() {
-    return firstname;
+  public String getFirstName() {
+    return firstName;
   }
 
   /**
    * Sets firstname.
    *
-   * @param firstname the firstname
+   * @param firstName the firstname
    */
-  public void setFirstname(String firstname) {
-    this.firstname = firstname;
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
   }
 
   /**
@@ -120,17 +120,17 @@ public class UserDetails {
    *
    * @return the lastname
    */
-  public String getLastname() {
-    return lastname;
+  public String getLastName() {
+    return lastName;
   }
 
   /**
    * Sets lastname.
    *
-   * @param lastname the lastname
+   * @param lastName the lastname
    */
-  public void setLastname(String lastname) {
-    this.lastname = lastname;
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
   }
 
   /**
@@ -230,8 +230,8 @@ public class UserDetails {
             + ", username='" + username + '\''
             + ", password='" + password + '\''
             + ", roleId=" + roleId
-            + ", firstname='" + firstname + '\''
-            + ", lastname='" + lastname + '\''
+            + ", firstname='" + firstName + '\''
+            + ", lastname='" + lastName + '\''
             + ", city='" + city + '\''
             + ", state='" + state + '\''
             + ", isActive=" + isActive

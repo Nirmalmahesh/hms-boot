@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,11 +19,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * The type Patient controller.
  */
 @RestController
 @RequestMapping("/api/patients")
+@CrossOrigin
 public class PatientController {
 
   /**
@@ -65,6 +69,24 @@ public class PatientController {
     Patient patient = patientService.readPatient(patientId);
     LOGGER.traceExit(patientId);
     return new ResponseEntity<>(patient, HttpStatus.OK);
+
+  }
+
+
+  /**
+   * Read patient response entity.
+   *
+   * @return the response entity
+   * @throws BusinessException the business exception
+   * @throws SystemException   the system exception
+   */
+  @GetMapping("/")
+  public ResponseEntity<?> readPatients() throws BusinessException,
+          SystemException {
+    LOGGER.traceEntry();
+    List<Patient> patients = patientService.readPatients();
+    LOGGER.traceExit(patients);
+    return new ResponseEntity<>(patients, HttpStatus.OK);
 
   }
 
