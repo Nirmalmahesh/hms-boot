@@ -35,6 +35,10 @@ public class DoctorController {
 
   private final Logger LOGGER = LogManager.getLogger(DoctorController.class);
 
+  @GetMapping("/hello")
+  private String hello(){
+    return "Hello World";
+  }
   /**
    * The Doctor service.
    */
