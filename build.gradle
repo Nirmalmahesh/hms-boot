@@ -3,9 +3,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
     id 'java'
     id 'checkstyle'
-    id "org.flywaydb.flyway" version "6.1.4"
-
-
+    id 'war'
 }
 
 group = 'global.coda.hms'
@@ -40,11 +38,7 @@ repositories {
     maven { url 'https://repo.spring.io/milestone' }
     maven { url 'https://repo.spring.io/snapshot' }
 }
-flyway {
-    url = 'jdbc:mysql://localhost:3306/hms'
-    user = 'sa'
-    password = 'joker'
-}
+
 
 dependencies {
 
