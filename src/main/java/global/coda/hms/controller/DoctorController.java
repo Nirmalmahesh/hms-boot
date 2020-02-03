@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * The type Doctor controller.
  */
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @RequestMapping("/api/doctors")
 public class DoctorController {
@@ -83,6 +83,7 @@ public class DoctorController {
    */
   @GetMapping("/")
   public ResponseEntity<?> readAllDoctors() throws BusinessException, SystemException {
+
     LOGGER.traceEntry();
     List<Doctor> doctor = doctorService.readDoctor();
     LOGGER.traceExit(doctor);
@@ -137,6 +138,7 @@ public class DoctorController {
   @GetMapping("/patients")
   public ResponseEntity<?> getAllPatientsOfDoctor(@RequestParam(value = "doctorId", required =
           false) Integer doctorId, HttpServletRequest request, HttpServletResponse response) throws BusinessException, SystemException {
+    System.out.println("******");
     LOGGER.traceEntry();
     if (doctorId == null) {
       doctorId = 0;
