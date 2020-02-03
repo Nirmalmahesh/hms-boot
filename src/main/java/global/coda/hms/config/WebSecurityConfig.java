@@ -48,11 +48,9 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcCo
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeRequests().antMatchers("/authenticate").permitAll().
+                .authorizeRequests().
                         anyRequest().permitAll();
-        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+
 
     }
 
