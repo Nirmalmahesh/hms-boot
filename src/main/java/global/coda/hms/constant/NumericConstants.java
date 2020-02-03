@@ -5,6 +5,9 @@ package global.coda.hms.constant;
  */
 public final class NumericConstants {
 
+  /**
+   * The constant ZERO.
+   */
   public static final int ZERO = 0;
   /**
    * The constant ONE.

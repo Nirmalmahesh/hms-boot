@@ -25,18 +25,17 @@ import java.util.List;
  */
 @Service
 public class DoctorService {
+  private final Logger LOGGER = LogManager.getLogger(DoctorService.class);
   /**
    * The Doctor mapper.
    */
   @Autowired
   private DoctorMapper doctorMapper;
-
   /**
    * The User mapper.
    */
   @Autowired
   private UserMapper userMapper;
-  private final Logger LOGGER = LogManager.getLogger(DoctorService.class);
 
   /**
    * Create doctor doctor.
@@ -165,6 +164,14 @@ public class DoctorService {
     }
   }
 
+  /**
+   * Gets all patients of doctor.
+   *
+   * @param doctorId the doctor id
+   * @return the all patients of doctor
+   * @throws SystemException   the system exception
+   * @throws BusinessException the business exception
+   */
   public List<DoctorPatientMapper> getAllPatientsOfDoctor(int doctorId) throws SystemException,
           BusinessException {
     LOGGER.traceEntry(Integer.toString(doctorId));
@@ -176,11 +183,24 @@ public class DoctorService {
     return doctorPatientMapper;
   }
 
+  /**
+   * Check list.
+   *
+   * @param doctorId the doctor id
+   * @return the list
+   */
   public List<Patient> check(int doctorId) {
     Integer[] patients = {1, 2, 3};
     return null;
   }
 
+  /**
+   * Read doctor list.
+   *
+   * @return the list
+   * @throws BusinessException the business exception
+   * @throws SystemException   the system exception
+   */
   public List<Doctor> readDoctor() throws BusinessException, SystemException {
     LOGGER.traceEntry();
     List<Doctor> doctor = doctorMapper.readDoctors();

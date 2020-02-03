@@ -26,6 +26,12 @@ public class UserDetails {
 
 
   /**
+   * Instantiates a new User details.
+   */
+  public UserDetails() {
+  }
+
+  /**
    * Gets user id.
    *
    * @return the user id
@@ -257,12 +263,6 @@ public class UserDetails {
    */
   public void setPhoneNumber(String phoneNumber) {
     this.phoneNumber = phoneNumber;
-  }
-
-  /**
-   * Instantiates a new User details.
-   */
-  public UserDetails() {
   }
 
 

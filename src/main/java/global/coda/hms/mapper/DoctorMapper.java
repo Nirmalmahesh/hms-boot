@@ -74,6 +74,12 @@ public interface DoctorMapper {
   @Update("update t_doctor set is_active = 0 where pk_doctor_id = #{doctorId}")
   int deleteDoctor(int doctorId);
 
+  /**
+   * Gets all patients of doctor.
+   *
+   * @param doctorId the doctor id
+   * @return the all patients of doctor
+   */
   @Select("<script> select distinct fk_doctor_id from t_record " +
           "<if test='doctorId!=0'>where fk_doctor_id = #{doctorId} and is_active = 1</if>" +
           "</script>")
@@ -88,6 +94,12 @@ public interface DoctorMapper {
   })
   List<DoctorPatientMapper> getAllPatientsOfDoctor(int doctorId);
 
+  /**
+   * Read patients list.
+   *
+   * @param doctorId the doctor id
+   * @return the list
+   */
   @Select(" select record.fk_patient_id,patient.fk_user_id as user_id,patient.blood_group,patient" +
           ".weight,patient.is_active,patient.created_date as created_time,patient.updated_date as" +
           " updated_time from t_record as record left join t_patient as patient on pk_patient_id " +
@@ -103,7 +115,11 @@ public interface DoctorMapper {
   List<Patient> readPatients(int doctorId);
 
 
-
+  /**
+   * Read doctors list.
+   *
+   * @return the list
+   */
   @Select("SELECT `t_doctor`.`pk_doctor_id` as doctor_id,`t_doctor`.`doctor_specialization`, "
           + "`t_doctor`"
           + ".`is_active`, `t_doctor`.`created_date` as created_time,`t_doctor`.`updated_date` as"

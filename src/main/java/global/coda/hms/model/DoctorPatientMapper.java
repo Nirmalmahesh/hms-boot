@@ -1,7 +1,6 @@
 package global.coda.hms.model;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,7 +14,7 @@ public class DoctorPatientMapper {
   /**
    * The Patient.
    */
-  List<Patient> patient ;
+  List<Patient> patient;
 
   /**
    * Instantiates a new Doctor patient mapper.

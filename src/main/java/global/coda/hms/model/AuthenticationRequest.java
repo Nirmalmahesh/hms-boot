@@ -1,41 +1,71 @@
 package global.coda.hms.model;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
+/**
+ * The type Authentication request.
+ */
 @Component
 public class AuthenticationRequest implements Serializable {
 
 
-    private String username;
-    private String password;
+  private String username;
+  private String password;
 
-    public String getUsername() {
-        return username;
-    }
+  /**
+   * Instantiates a new Authentication request.
+   */
+//need default constructor for JSON Parsing
+  public AuthenticationRequest() {
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+  }
 
-    public String getPassword() {
-        return password;
-    }
+  /**
+   * Instantiates a new Authentication request.
+   *
+   * @param username the username
+   * @param password the password
+   */
+  public AuthenticationRequest(String username, String password) {
+    this.setUsername(username);
+    this.setPassword(password);
+  }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+  /**
+   * Gets username.
+   *
+   * @return the username
+   */
+  public String getUsername() {
+    return username;
+  }
 
-    //need default constructor for JSON Parsing
-    public AuthenticationRequest()
-    {
+  /**
+   * Sets username.
+   *
+   * @param username the username
+   */
+  public void setUsername(String username) {
+    this.username = username;
+  }
 
-    }
+  /**
+   * Gets password.
+   *
+   * @return the password
+   */
+  public String getPassword() {
+    return password;
+  }
 
-    public AuthenticationRequest(String username, String password) {
-        this.setUsername(username);
-        this.setPassword(password);
-    }
+  /**
+   * Sets password.
+   *
+   * @param password the password
+   */
+  public void setPassword(String password) {
+    this.password = password;
+  }
 }

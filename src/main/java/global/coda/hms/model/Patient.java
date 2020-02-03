@@ -19,10 +19,26 @@ public final class Patient {
   private Date updatedTime;
   private UserDetails userDetails;
 
+  /**
+   * Instantiates a new Patient.
+   */
+  public Patient() {
+  }
+
+  /**
+   * Gets user details.
+   *
+   * @return the user details
+   */
   public UserDetails getUserDetails() {
     return userDetails;
   }
 
+  /**
+   * Sets user details.
+   *
+   * @param userDetails the user details
+   */
   public void setUserDetails(UserDetails userDetails) {
     this.userDetails = userDetails;
   }
@@ -39,12 +55,6 @@ public final class Patient {
             + ", updatedTime=" + updatedTime
             + ", userDetails=" + userDetails
             + '}';
-  }
-
-  /**
-   * Instantiates a new Patient.
-   */
-  public Patient() {
   }
 
   /**

@@ -22,6 +22,13 @@ public final class Doctor {
    */
   private UserDetails userDetails;
 
+  /**
+   * Instantiates a new Doctor.
+   */
+  public Doctor() {
+
+  }
+
   @Override
   public String toString() {
     return "Doctor{"
@@ -52,14 +59,6 @@ public final class Doctor {
   public void setUserDetails(UserDetails userDetails) {
     this.userDetails = userDetails;
   }
-
-  /**
-   * Instantiates a new Doctor.
-   */
-  public Doctor() {
-
-  }
-
 
   /**
    * Gets user id.

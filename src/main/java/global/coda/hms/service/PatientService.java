@@ -23,6 +23,7 @@ import java.util.List;
  */
 @Service
 public class PatientService {
+  private final Logger LOGGER = LogManager.getLogger(PatientService.class);
   /**
    * The User mapper.
    */
@@ -33,8 +34,6 @@ public class PatientService {
    */
   @Autowired
   private PatientMapper patientMapper;
-
-  private final Logger LOGGER = LogManager.getLogger(PatientService.class);
 
   /**
    * Create patient patient.
@@ -156,6 +155,13 @@ public class PatientService {
     }
   }
 
+  /**
+   * Read patients list.
+   *
+   * @return the list
+   * @throws BusinessException the business exception
+   * @throws SystemException   the system exception
+   */
   public List<Patient> readPatients() throws BusinessException, SystemException {
     LOGGER.traceEntry();
     List<Patient> patient = patientMapper.readPatients();

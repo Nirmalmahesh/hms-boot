@@ -61,6 +61,12 @@ public interface UserMapper {
   @Update("update t_user_details set is_active = 0 where pk_user_id = #{userId}")
   int deleteUser(int userId);
 
+  /**
+   * Find user by username user details.
+   *
+   * @param username the username
+   * @return the user details
+   */
   @Select("select username,password from t_user_details where username = #{username}")
   UserDetails findUserByUsername(String username);
 

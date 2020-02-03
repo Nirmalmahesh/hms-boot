@@ -11,24 +11,45 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * The type Authentication controller.
+ */
 //@CrossOrigin
 @RestController
 public class AuthenticationController {
 
+  /**
+   * The User details service.
+   */
   @Autowired
   MyUserDetailsService userDetailsService;
+  /**
+   * The Authentication manager.
+   */
   @Autowired
   AuthenticationManager authenticationManager;
+  /**
+   * The Jwt token util.
+   */
   @Autowired
   JwtUtil jwtTokenUtil;
+  /**
+   * The Authentication request.
+   */
   @Autowired
   AuthenticationRequest authenticationRequest;
 
+  /**
+   * Validate user response entity.
+   *
+   * @param authenticationRequest the authentication request
+   * @return the response entity
+   * @throws BusinessException the business exception
+   */
   @PostMapping("/authenticate")
   public ResponseEntity<?> validateUser(@RequestBody AuthenticationRequest authenticationRequest) throws BusinessException {
     try {

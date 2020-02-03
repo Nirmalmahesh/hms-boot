@@ -5,10 +5,21 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+/**
+ * The type Custom user details.
+ */
 public class CustomUserDetails implements UserDetails {
 
+  /**
+   * The User.
+   */
   global.coda.hms.model.UserDetails user;
 
+  /**
+   * Instantiates a new Custom user details.
+   *
+   * @param user the user
+   */
   public CustomUserDetails(global.coda.hms.model.UserDetails user) {
     this.user = user;
   }

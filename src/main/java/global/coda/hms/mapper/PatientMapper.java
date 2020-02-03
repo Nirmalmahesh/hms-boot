@@ -29,7 +29,7 @@ public interface PatientMapper {
    */
   @Insert("INSERT INTO `t_patient` (`fk_user_id`,`blood_group`, `weight`) VALUES (#{userId}, "
           + "#{bloodGroup}, #{weight})")
-  @Options(useGeneratedKeys = true, keyProperty = "userId", keyColumn = "pk_patinet_id")
+  @Options(useGeneratedKeys = true, keyProperty = "patientId", keyColumn = "pk_patient_id")
   int createPatient(Patient patient);
 
 
@@ -67,6 +67,11 @@ public interface PatientMapper {
   @Update("update t_patient set is_active = 0 where pk_patient_id = #{patientId}")
   int deletePatient(int patientId);
 
+  /**
+   * Read patients list.
+   *
+   * @return the list
+   */
   @Select("select pk_patient_id as patient_id, fk_user_id as user_id,blood_group ,weight,"
           + "is_active,created_date as created_time,updated_date as updated_time from t_patient "
           + "where is_active = 1")
