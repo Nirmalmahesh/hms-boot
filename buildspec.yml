@@ -8,10 +8,10 @@ phases:
       - echo Build started on `date`
       - chmod +x gradlew
       - ./gradlew bootWar
-      - mv build/libs/hms-0.0.1-SNAPSHOT.war hms-0.0.1-SNAPSHOT.war
+      - mv build/libs/*.war ./
 artifacts:
   files:
-    - hms-0.0.1-SNAPSHOT.war
-    - .ebextensions/**/*
+    - ./*.war
+
 
   discard-paths: yes
