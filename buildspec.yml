@@ -8,6 +8,7 @@ phases:
       - echo Build started on `date`
       - chmod +x gradlew
       - ./gradlew bootWar
+      - mv build/libs//hms-0.0.1-SNAPSHOT.war hms-0.0.1-SNAPSHOT.war
 artifacts:
   files:
     - ./build/libs/hms-0.0.1-SNAPSHOT.war
