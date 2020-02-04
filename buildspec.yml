@@ -13,5 +13,5 @@ artifacts:
   files:
     -  appspec.yml
     - ./hms-0.0.1-SNAPSHOT.war
-  base-directory: 'build/libs'
+  base-directory: './'
   discard-paths: yes
