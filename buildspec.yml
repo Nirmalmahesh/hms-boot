@@ -12,6 +12,6 @@ phases:
 artifacts:
   files:
     -  appspec.yml
-    - ./build/libs/hms-0.0.1-SNAPSHOT.war
+    - ./hms-0.0.1-SNAPSHOT.war
   base-directory: 'build/libs'
   discard-paths: yes
