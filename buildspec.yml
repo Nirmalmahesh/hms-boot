@@ -6,8 +6,9 @@ phases:
       java: corretto8
   post_build:
     commands:
-      - gradlew package
-      - mv target/hms-0.0.1-SNAPSHOT.war hms-0.0.1-SNAPSHOT.war
+      - chmod +x gradlew
+      - ./gradlew bootWar
+      - mv build/libs/hms-0.0.1-SNAPSHOT.war hms-0.0.1-SNAPSHOT.war
 artifacts:
   files:
     - hms-0.0.1-SNAPSHOT.war
