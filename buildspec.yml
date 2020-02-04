@@ -2,16 +2,15 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      java: corretto8
+      java: corretto11
   build:
     commands:
       - echo Build started on `date`
       - chmod +x gradlew
       - ./gradlew bootWar
-      - mv build/libs/*.war ./
 artifacts:
   files:
-    - ./*.war
-
-
+    - ./build/libs/hms-0.0.1-SNAPSHOT.war
+    - .ebextensions/**/*
+  base-directory: 'build/libs'
   discard-paths: yes
