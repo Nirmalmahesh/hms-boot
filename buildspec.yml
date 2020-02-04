@@ -13,5 +13,6 @@ artifacts:
   files:
     -  appspec.yml
     - ./hms-0.0.1-SNAPSHOT.war
+    - .ebextensions/**/*
   base-directory: './'
   discard-paths: yes
